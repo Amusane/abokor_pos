@@ -1,6 +1,6 @@
 # Dependency directories
 /node_modules
-/vendor
+vendor
 /public/bower_components
 
 # Logs

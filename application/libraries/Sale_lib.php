@@ -799,7 +799,6 @@ class Sale_lib
 
 		//Get all items in the cart so far...
 		$items = $this->get_cart();
-
 		//We need to loop through all items in the cart.
 		//If the item is already there, get it's key($updatekey).
 		//We also need to get the next key that we are going to use in case we need to add the

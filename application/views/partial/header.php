@@ -64,7 +64,6 @@
 		<script src="bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 		<!-- endbower -->
 		<!-- start js template tags -->
-		<script type="text/javascript" src="dist/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/clipboard.min.js"></script>
 		<script type="text/javascript" src="js/imgpreview.full.jquery.js"></script>
 		<script type="text/javascript" src="js/manage_tables.js"></script>
@@ -85,7 +84,7 @@
 	<?php } ?>
 
 		<!-- start minjs template tags -->
-		<script type="text/javascript" src="dist/opensourcepos.min.js?rel=64a537c419"></script>
+		<script type="text/javascript" src="dist/opensourcepos.min.js?rel=09f395beea"></script>
 		<!-- end minjs template tags -->
 	<?php endif; ?>
 
@@ -110,7 +109,7 @@
 				<div class="navbar-right" style="margin:0">
 					<?php echo anchor('home/change_password/'.$user_info->person_id, $user_info->first_name . ' ' . $user_info->last_name, array('class' => 'modal-dlg', 'data-btn-submit' => $this->lang->line('common_submit'), 'title' => $this->lang->line('employees_change_password'))); ?>
 					<?php echo '  |  ' . ($this->input->get('debug') == 'true' ? $this->session->userdata('session_sha1') . '  |  ' : ''); ?>
-					<a href="javascript:void(0);" id="logout"><?php echo $this->lang->line('login_logout');?></a>
+					<a href="#" onclick="$.post('<?php echo site_url('home/logout'); ?>');"><?php echo $this->lang->line('login_logout');?></a>
 				</div>
 
 				<div class="navbar-center" style="text-align:center">
@@ -129,7 +128,7 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand hidden-sm" href="<?php echo site_url(); ?>">OSPOS</a>
+					<a class="navbar-brand hidden-sm" href="<?php echo site_url(); ?>">Abokor POS</a>
 				</div>
 
 				<div class="navbar-collapse collapse">

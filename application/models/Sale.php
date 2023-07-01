@@ -573,7 +573,7 @@ class Sale extends CI_Model
 	 * Save the sale information after the sales is complete but before the final document is printed
 	 * The sales_taxes variable needs to be initialized to an empty array before calling
 	 */
-	public function save($sale_id, &$sale_status, &$items, $customer_id, $employee_id, $comment, $invoice_number,
+	public function save($sale_id, &$sale_status, &$items, $customer_id, $employee_id, $employee_name, $comment, $invoice_number,
 							$work_order_number, $quote_number, $sale_type, $payments, $dinner_table, &$sales_taxes)
 	{
 		if($sale_id != -1)
@@ -727,6 +727,7 @@ class Sale extends CI_Model
 			}
 		}
 
+
 		$this->db->trans_complete();
 
 		if($this->db->trans_status() === FALSE)
@@ -734,6 +735,77 @@ class Sale extends CI_Model
 			return -1;
 		}
 
+		/*
+		*	If Transaction is complete
+		*	Push sale info to MoFTA
+		*/
+		
+		try
+		{
+			$url = 'https://testmofta.slmof.org/api/Order';
+					
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, $url);
+			curl_setopt($curl, CURLOPT_POST, true);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			
+			$headers = array(
+				"Accept: application/json",
+				"Content-Type: application/json",
+				"ApiSecretKey: 123456789",
+				"TIN: 111111181"
+			);
+			
+			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+			$tax_info = $sales_taxes[0]['X5-GST-Tax'];
+			
+			$items_to_objects = [];
+			foreach ($items as $item)
+			{
+				$item_tax = ($tax_info['tax_rate'] / 100) * $item['discounted_total'];
+				$item_tax = number_format($item_tax, tax_decimals(), '.', '');
+				
+				$item_obj = (object)[
+					"orderName"	=>	$item['name'],
+					"quantity"	=>	$item['quantity'],
+					"price"	=>	$item['price'],
+					"total"	=>	$item['discounted_total'],
+					"rate"	=>	$tax_info["tax_rate"] / 100,
+					"priceTaxable"	=>	number_format(($item['discounted_total'] + $item_tax), tax_decimals(), '.', ''),
+					"tax"	=>	$item_tax
+				];
+
+				array_push($items_to_objects, $item_obj);
+			}
+
+			$data = (object)[
+				"tin"	=>	"111111181",
+				"tradeName"	=>	"Abokor POS",
+				"gSTTaxableBase"	=>	$tax_info['sale_tax_basis'],
+				"rate"	=>	$tax_info["tax_rate"] / 100,
+				"totalTax"	=>	number_format($tax_info['sale_tax_amount'], tax_decimals(), '.', ''),
+				"total"	=>	$tax_info['sale_tax_basis'] + $tax_info['sale_tax_amount'],
+				"sourceOrderId"	=>	$sale_id,
+				"currency"	=>	"USD",
+				"billedBy"	=>	$employee_name ?? '',
+				"orderDate"	=>	(new \DateTime())->format('Y-m-d\TH:i:s.v'),
+				"orderDetails"	=>	$items_to_objects
+			];
+			echo '<pre>';print_r($data);echo '</pre>';
+			curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+			
+			$resp = curl_exec($curl);
+			
+			curl_close($curl);
+			echo $resp;
+			
+
+		} 
+		catch (\Exception $e) {
+			// TODO Auto-generated catch
+		}
+		
 		return $sale_id;
 	}
 

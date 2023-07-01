@@ -1,5 +1,6 @@
-<?php
-$lang["tables_all"] = "الكل";
+<?php 
+
+$lang["tables_all"] = "الجميع";
 $lang["tables_columns"] = "أعمدة";
 $lang["tables_hide_show_pagination"] = "عرض/إخفاء أرقام الصفحات";
 $lang["tables_loading"] = "جارى التحميل، برجاء الإنتظار ...";

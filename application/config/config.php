@@ -19,7 +19,7 @@ $config['application_version'] = '3.3.8';
 | 
 | 
 */ 
-$config['commit_sha1'] = 'dev';
+$config['commit_sha1'] = 'ffe492';
  
 /* 
 |-------------------------------------------------------------------------- 
@@ -359,7 +359,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = getenv('ENCRYPTION_KEY') ? getenv('ENCRYPTION_KEY') : '';
+$config['encryption_key'] = getenv('ENCRYPTION_KEY') ? getenv('ENCRYPTION_KEY') : '9dd8eeba958d516bb4ef8568e9a68a40eec99e77382f098bba4116f3b398ff8d';
 
 /*
 |--------------------------------------------------------------------------

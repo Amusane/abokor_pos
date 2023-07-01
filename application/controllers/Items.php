@@ -190,7 +190,7 @@ class Items extends Secure_Controller
 		{
 			$data = [];
 		}
-
+		
 		//allow_temp_items is set in the index function of items.php or sales.php
 		$data['allow_temp_item'] = $this->session->userdata('allow_temp_items');
 		$data['item_tax_info'] = $this->xss_clean($this->Item_taxes->get_info($item_id));
@@ -206,7 +206,7 @@ class Items extends Secure_Controller
 		}
 
 		$item_info = $this->Item->get_info($item_id);
-
+		
 		foreach(get_object_vars($item_info) as $property => $value)
 		{
 			$item_info->$property = $this->xss_clean($value);
@@ -357,7 +357,7 @@ class Items extends Secure_Controller
 		{
 			$data['selected_low_sell_item'] = '';
 		}
-
+		
 		$this->load->view('items/form', $data);
 	}
 

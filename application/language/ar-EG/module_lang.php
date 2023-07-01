@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 $lang["module_admin_cashups"] = "";
 $lang["module_admin_cashups_desc"] = "";
 $lang["module_attributes"] = "ميزات/مميزات";

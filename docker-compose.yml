@@ -1,4 +1,4 @@
-version: '2'
+version: '3.4'
 
 volumes:
     uploads:
@@ -22,20 +22,19 @@ services:
         depends_on:
           - mysql
         ports:
-          - "127.0.0.1:80:80"
+          - "8000:80"
         networks:
           - app_net
           - db_net
         volumes:
-          - uploads:/app/public/uploads
-          - logs:/app/application/logs
+          - "./:/app:rw"
         environment:
           - CI_ENV=production
           - FORCE_HTTPS=false
           - PHP_TIMEZONE=UTC
-          - MYSQL_USERNAME=admin
-          - MYSQL_PASSWORD=pointofsale
-          - MYSQL_DB_NAME=ospos
+          - MYSQL_USERNAME=root
+          - MYSQL_PASSWORD=
+          - MYSQL_DB_NAME=pos
           - MYSQL_HOST_NAME=mysql
 
     mysql:
@@ -52,7 +51,7 @@ services:
           - mysql:/var/lib/mysql:rw
         environment:
           - MYSQL_ROOT_PASSWORD=pointofsale
-          - MYSQL_DATABASE=ospos
-          - MYSQL_USER=admin
-          - MYSQL_PASSWORD=pointofsale
+          - MYSQL_DATABASE=pos
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=
 

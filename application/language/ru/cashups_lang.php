@@ -1,7 +1,8 @@
-<?php
-$lang["cashups_amount"] = "Количество";
-$lang["cashups_amount_number"] = "Количество должно быть цифрами";
-$lang["cashups_amount_required"] = "Количество - обязательное поле.";
+<?php 
+
+$lang["cashups_amount"] = "";
+$lang["cashups_amount_number"] = "";
+$lang["cashups_amount_required"] = "";
 $lang["cashups_cancel_cashups"] = "";
 $lang["cashups_cancel_cashups_enter"] = "";
 $lang["cashups_cannot_be_deleted"] = "";
@@ -18,7 +19,7 @@ $lang["cashups_closed_date"] = "";
 $lang["cashups_confirm_delete"] = "";
 $lang["cashups_confirm_restore"] = "";
 $lang["cashups_confirm_submit"] = "";
-$lang["cashups_date_number"] = "Дата должна быть цифрами";
+$lang["cashups_date_number"] = "";
 $lang["cashups_date_required"] = "";
 $lang["cashups_description"] = "";
 $lang["cashups_enable_expected"] = "";
