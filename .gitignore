@@ -1,6 +1,5 @@
 # Dependency directories
 /node_modules
-/public/bower_components
 
 # Logs
 /application/logs/*
@@ -11,7 +10,6 @@ npm-debug.log*
 /tmp
 /public/license/.licenses
 /public/license/bower.LICENSES
-/public/dist
 
 # Docker
 !/docker/.env
