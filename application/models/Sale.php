@@ -762,7 +762,6 @@ class Sale extends CI_Model
 				
 				curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-				// echo '<pre>';print_r($sales_taxes);echo '</pre>';die();
 				$items_to_objects = [];
 				foreach ($items as $item)
 				{
@@ -795,13 +794,12 @@ class Sale extends CI_Model
 					"orderDate"	=>	(new \DateTime())->format('Y-m-d\TH:i:s.v'),
 					"orderDetails"	=>	$items_to_objects
 				];
-				echo '<pre>';print_r($data);echo '</pre>';
+				
 				curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
 				
 				$resp = curl_exec($curl);
 				
 				curl_close($curl);
-				echo $resp;
 			}
 			
 
