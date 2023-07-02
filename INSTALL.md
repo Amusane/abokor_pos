@@ -19,7 +19,7 @@ First of all, if you're seeing the message `system folder missing` after launchi
 7. Go to your install `public` dir via the browser.
 8. Log in using
    - Username: admin
-   - Password: password
+   - Password: pointofsale
 9. Enjoy!
 10. Oops, an issue? Please make sure you read the FAQ, wiki page, and you checked open and closed issues on GitHub. PHP `display_errors` is disabled by default. Create an` application/config/.env` file from the `.env.example` to enable it in a development environment.
 
